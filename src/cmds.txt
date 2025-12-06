@@ -1,0 +1,20 @@
+Usage: gww <command> [<args>]
+
+Gww commands:
+- info|i                                  Show Gww info
+
+Worktree management:
+- list|ls                                 List all worktrees
+- new|n              <worktree>           Create worktree
+- remove|rm          <worktree>           Remove worktree
+- open               <branch>             Create worktree from branch
+- close              <worktree>           Remove worktree from branch
+- checkout           <worktree>           Checkout worktree
+- rename|rn          <worktree> <name>    Rename worktree
+
+Current worktree management:
+- config                                  Log Gww config
+- config get         <property>           Get Gww config property
+- config set         <property> <value>   Set Gww config property
+- config remove|rm   <property>           Remove Gww config property
+- postCreate|pc                           Run postCreate

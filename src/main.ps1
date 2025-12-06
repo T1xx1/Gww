@@ -180,27 +180,7 @@ function Build-Worktree {
 #>
 switch ($cmd) {
 	{$_ -in "","help","h"} {
-		Write-Host "Usage: gww <command> [<args>]"
-		Write-Host ""
-		Write-Host "Gww commands:"
-		Write-Host "- info|i                                  Show Gww info"
-		Write-Host ""
-		Write-Host "Worktree commands:"
-		Write-Host "- list|ls                                 List all worktrees"
-		Write-Host "- new|n              <worktree>           Create worktree"
-		Write-Host "- remove|rm          <worktree>           Remove worktree"
-		Write-Host "- open               <branch>             Create worktree from branch"
-		Write-Host "- close              <worktree>           Remove worktree from branch"
-		Write-Host "- checkout           <worktree>           Checkout worktree"
-		Write-Host "- rename|rn          <worktree> <name>    Rename worktree"
-		Write-Host ""
-		Write-Host "Current worktree commands:"
-		Write-Host "- config                                  Log Gww config"
-		Write-Host "- config get         <property>           Get Gww config property"
-		Write-Host "- config set         <property> <value>   Set Gww config property"
-		Write-Host "- config remove|rm   <property>           Remove Gww config property"
-		Write-Host "- postCreate|pc                           Run postCreate"
-		Write-Host ""
+		Get-Content (Join-Path $gwwRoot "src/cmds.txt") | Write-Host
 	}
 
 	{$_ -in "info","i","version","v"} {
