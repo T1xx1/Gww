@@ -38,9 +38,9 @@ $wts = git worktree list | ForEach-Object {
 $configType
 $config
 
-if (Join-Path $wtRoot "configs/gww.json" | Test-Path) {
+if (Join-Path $wtRoot ".config/gww.json" | Test-Path) {
 	$configType = "folder"
-	$config = Get-Content (Join-Path $wtRoot "configs/gww.json") | ConvertFrom-Json
+	$config = Get-Content (Join-Path $wtRoot ".config/gww.json") | ConvertFrom-Json
 }
 if (Join-Path $wtRoot "gww.config.json" | Test-Path) {
 	$configType = "file"
@@ -440,7 +440,7 @@ switch ($cmd) {
 
 				switch ($configType) {
 					"folder" {
-						ConvertTo-Json $config | Set-Content (Join-Path $wtRoot "configs/gww.json")
+						ConvertTo-Json $config | Set-Content (Join-Path $wtRoot ".config/gww.json")
 					}
 					"file" {
 						ConvertTo-Json $config | Set-Content (Join-Path $wtRoot "gww.config.json")
@@ -466,7 +466,7 @@ switch ($cmd) {
 
 				switch ($configType) {
 					"folder" {
-						$config | ConvertTo-Json | Set-Content (Join-Path $wtRoot "configs/gww.json")
+						$config | ConvertTo-Json | Set-Content (Join-Path $wtRoot ".config/gww.json")
 					}
 					"file" {
 						$config | ConvertTo-Json | Set-Content (Join-Path $wtRoot "gww.config.json")
