@@ -1,0 +1,1 @@
+C:\Users\T1xx1\Desktop\Dev\Gww\src\main.ps1 @Args
