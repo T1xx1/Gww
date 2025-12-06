@@ -35,17 +35,18 @@ $wts = git worktree list | ForEach-Object {
 }
 
 <# config #>
-$configType
-$config
+$configPath
 
 if (Join-Path $wtRoot ".config/gww.json" | Test-Path) {
-	$configType = "folder"
-	$config = Get-Content (Join-Path $wtRoot ".config/gww.json") | ConvertFrom-Json
+	$configPath = ".config/gww.json"
 }
 if (Join-Path $wtRoot "gww.config.json" | Test-Path) {
-	$configType = "file"
-	$config = Get-Content (Join-Path $wtRoot "gww.config.json") | ConvertFrom-Json
+	$configPath = "gww.config.json"
 }
+
+$wtConfigPath = Join-Path $wtRoot $configPath
+
+$config = Get-Content $wtConfigPath | ConvertFrom-Json
 
 $defaultConfig = [PSCustomObject]@{
 	mainBranch = "main"
@@ -54,10 +55,10 @@ $defaultConfig = [PSCustomObject]@{
 }
 
 if (-not $config) {
-	$configType = "file"
+	$configPath = "gww.config.json"
 	$config = $defaultConfig
 
-	Set-Content (Join-Path $wtRoot "gww.config.json") (ConvertTo-Json $config)
+	Set-Content $wtConfigPath (ConvertTo-Json $config)
 	
 	Write-Host "Gww config initialized`n" -ForegroundColor Green
 }
@@ -75,7 +76,8 @@ if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.
 		$config | Add-Member -MemberType NoteProperty -Name "pathPrefix" -Value $defaultConfig.pathPrefix
 	}
 
-	Set-Content (Join-Path $wtRoot "gww.config.json") (ConvertTo-Json $config)
+	<# gww.config.json #>
+	Set-Content $configPath (ConvertTo-Json $config)
 	
 	Write-Host "Gww config tweaked`n" -ForegroundColor Green
 }
@@ -123,7 +125,7 @@ function Build-Worktree {
 	)
 
 	<# gww.config.json #>
-	Copy-Item (Join-Path $wtRoot "gww.config.json") (Join-Path $wr "gww.config.json")
+	Copy-Item $wtConfigPath (Join-Path $wr $configPath)
 
 	<# configs #>
 	if ($config.configs) {
@@ -438,14 +440,8 @@ switch ($cmd) {
 					$config | Add-Member $property $value
 				}
 
-				switch ($configType) {
-					"folder" {
-						ConvertTo-Json $config | Set-Content (Join-Path $wtRoot ".config/gww.json")
-					}
-					"file" {
-						ConvertTo-Json $config | Set-Content (Join-Path $wtRoot "gww.config.json")
-					}
-				}
+
+				ConvertTo-Json $config | Set-Content $wtConfigPath
 
 				Write-Host "Set '$property' property to '$value'" -ForegroundColor Green
 			}
@@ -464,14 +460,7 @@ switch ($cmd) {
 
 				$config.PSObject.Properties.Remove($property)
 
-				switch ($configType) {
-					"folder" {
-						$config | ConvertTo-Json | Set-Content (Join-Path $wtRoot ".config/gww.json")
-					}
-					"file" {
-						$config | ConvertTo-Json | Set-Content (Join-Path $wtRoot "gww.config.json")
-					}
-				}
+				ConvertTo-Json $config | Set-Content $wtConfigPath
 
 				Write-Host "Removed '$property' property" -ForegroundColor Green
 			}
