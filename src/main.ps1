@@ -187,7 +187,7 @@ switch ($cmd) {
 		}
 
 		foreach ($b in $branches) {
-			if ($mainWt -ne $b) {
+			if ($mainWt -eq $b) {
 				continue
 			}
 
@@ -206,7 +206,7 @@ switch ($cmd) {
 		}
 
 		foreach ($w in $wts) {
-			if ($mainWt -ne $w) {
+			if ($mainWt -eq $w) {
 				continue
 			}
 			
