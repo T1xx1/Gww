@@ -181,9 +181,9 @@ switch ($cmd) {
 
 	{$_ -in "branches","bs"} {
 		if ($mainWt -eq $wt) {
-			Write-Host "- $mainWt (main) (current)" -ForegroundColor Green
+			Write-Host "- $mainWt (main) (current)" -ForegroundColor Blue
 		} else {
-			Write-Host "- $mainWt (main)" -ForegroundColor Blue
+			Write-Host "- $mainWt (main)"
 		}
 
 		foreach ($b in $branches) {
@@ -192,17 +192,17 @@ switch ($cmd) {
 			}
 
 			if ($wt -eq $b) {
-				Write-Host "- $b (current)" -ForegroundColor Green
+				Write-Host "- $b (current)" -ForegroundColor Blue
 			} else {
-				Write-Host "- $b" -ForegroundColor Blue
+				Write-Host "- $b"
 			}
 		}
 	}
 	{$_ -in "list","ls","worktrees","wts"} {
 		if ($mainWt -eq $wt) {
-			Write-Host "- $mainWt (main) (current)" -ForegroundColor Green
+			Write-Host "- $mainWt (main) (current)" -ForegroundColor Blue
 		} else {
-			Write-Host "- $mainWt (main)" -ForegroundColor Blue
+			Write-Host "- $mainWt (main)"
 		}
 
 		foreach ($w in $wts) {
@@ -211,9 +211,9 @@ switch ($cmd) {
 			}
 			
 			if ($wt -eq $w) {
-				Write-Host "- $w (current)" -ForegroundColor Green
+				Write-Host "- $w (current)" -ForegroundColor Blue
 			} else {
-				Write-Host "- $w" -ForegroundColor Blue
+				Write-Host "- $w"
 			}
 		}
 	}
