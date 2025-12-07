@@ -61,15 +61,15 @@ $config = Get-Content $wtConfigPath | ConvertFrom-Json
 
 if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.pathPrefix)) {
 	if (-not $config.mainBranch) {
-		$config | Add-Member -MemberType NoteProperty -Name "mainBranch" -Value $defaultConfig.mainBranch
+		$config | Add-Member NoteProperty "mainBranch" $defaultConfig.mainBranch
 	}
 	
 	if (-not $config.worktreesDir) {
-		$config | Add-Member -MemberType NoteProperty -Name "worktreesDir" -Value $defaultConfig.worktreesDir
+		$config | Add-Member NoteProperty "worktreesDir" $defaultConfig.worktreesDir
 	}
 	
 	if (-not $config.pathPrefix) {
-		$config | Add-Member -MemberType NoteProperty -Name "pathPrefix" -Value $defaultConfig.pathPrefix
+		$config | Add-Member NoteProperty "pathPrefix" $defaultConfig.pathPrefix
 	}
 
 	<# gww.config.json #>
