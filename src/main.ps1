@@ -35,33 +35,29 @@ $wts = git worktree list | ForEach-Object {
 }
 
 <# config #>
-$configPath
-
-if (Join-Path $wtRoot ".config/gww.json" | Test-Path) {
-	$configPath = ".config/gww.json"
-}
-if (Join-Path $wtRoot "gww.config.json" | Test-Path) {
-	$configPath = "gww.config.json"
-}
-
-$wtConfigPath = Join-Path $wtRoot $configPath
-
-$config = Get-Content $wtConfigPath | ConvertFrom-Json
-
 $defaultConfig = [PSCustomObject]@{
 	mainBranch = "main"
 	worktreesDir = "../"
 	pathPrefix = ($wtRoot -split "/")[-1] + "-"
 }
 
-if (-not $config) {
-	$configPath = "gww.config.json"
-	$config = $defaultConfig
+$configPath
 
-	Set-Content $wtConfigPath (ConvertTo-Json $config)
+if (Join-Path $wtRoot ".config/gww.json" | Test-Path) {
+	$configPath = ".config/gww.json"
+} else {
+	$configPath = "gww.config.json"
+}
+
+$wtConfigPath = Join-Path $wtRoot $configPath
+
+if (-not (Test-Path $wtConfigPath)) {
+	Set-Content $wtConfigPath (ConvertTo-Json $defaultConfig)
 	
 	Write-Host "Gww config initialized`n" -ForegroundColor Green
 }
+
+$config = Get-Content $wtConfigPath | ConvertFrom-Json
 
 if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.pathPrefix)) {
 	if (-not $config.mainBranch) {
