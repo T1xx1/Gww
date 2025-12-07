@@ -107,7 +107,7 @@ function Build-WtRoot {
 	
 	return Join-Path $mainWtRoot $config.worktreesDir ($config.pathPrefix + $wr)
 }
-function Build-Worktree {
+function Build-Wt {
 	param(
 		[string] $wr
 	)
@@ -239,7 +239,7 @@ switch ($cmd) {
 
 		Invoke-Expression "git worktree add $wr -b $w --quiet"
 		
-		Build-Worktree $wr
+		Build-Wt $wr
 
 		Write-Host "Worktree created" -ForegroundColor Green
 	}
@@ -295,7 +295,7 @@ switch ($cmd) {
 
 		Invoke-Expression "git worktree add $wr $b --quiet"
 
-		Build-Worktree $wr
+		Build-Wt $wr
 
 		Write-Host "Worktree opened" -ForegroundColor Green
 	}
