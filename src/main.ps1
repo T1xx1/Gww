@@ -73,7 +73,7 @@ if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.
 	}
 
 	<# gww.config.json #>
-	Set-Content $configPath (ConvertTo-Json $config)
+	Set-Content $wtConfigPath (ConvertTo-Json $config)
 	
 	Write-Host "Gww config tweaked`n" -ForegroundColor Green
 }
