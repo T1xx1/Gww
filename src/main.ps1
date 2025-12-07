@@ -105,7 +105,7 @@ function Build-WtRoot {
 		[string] $w
 	)
 	
-	return Join-Path $mainWtRoot $config.worktreesDir ($config.pathPrefix + $wr)
+	return Join-Path $mainWtRoot $config.worktreesDir ($config.pathPrefix + $w)
 }
 function Build-Wt {
 	param(
@@ -139,7 +139,7 @@ function Build-Wt {
 	if ($config.postCreate) {
 		Write-Host "Running postCreate"
 
-		Invoke-Expression $config.postCreate
+		Invoke-Expression $config.postCreate | Out-Null
 
 		Write-Host "postCreate ran"
 	}
