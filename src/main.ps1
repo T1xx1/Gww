@@ -109,11 +109,11 @@ function Build-WtRoot {
 }
 function Build-Wt {
 	param(
-		[string] $wr
+		[string] $nwr
 	)
 
 	<# gww.config.json #>
-	Copy-Item $wtConfigPath (Join-Path $wr $configPath)
+	Copy-Item $wtConfigPath (Join-Path $nwr $configPath)
 
 	<# configs #>
 	if ($config.configs) {
@@ -121,7 +121,7 @@ function Build-Wt {
 			$filePath = Join-Path $wtRoot $file
 
 			if (Test-Path $filePath) {
-				Copy-Item $filePath (Join-Path $path $file)
+				Copy-Item $filePath (Join-Path $nwr $file)
 			}
 		}
 
