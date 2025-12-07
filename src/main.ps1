@@ -194,15 +194,15 @@ switch ($cmd) {
 			Write-Host "- $mainWt (main)" -ForegroundColor Blue
 		}
 
-		git branch | ForEach-Object {
-			$b = ($_ -split "\s+")[1]
-
+		foreach ($b in $branches) {
 			if ($mainWt -ne $b) {
-				if ($wt -eq $b) {
-					Write-Host "- $b (current)" -ForegroundColor Green
-				} else {
-					Write-Host "- $b" -ForegroundColor Blue
-				}
+				continue
+			}
+
+			if ($wt -eq $b) {
+				Write-Host "- $b (current)" -ForegroundColor Green
+			} else {
+				Write-Host "- $b" -ForegroundColor Blue
 			}
 		}
 	}
@@ -213,15 +213,15 @@ switch ($cmd) {
 			Write-Host "- $mainWt (main)" -ForegroundColor Blue
 		}
 
-		git worktree list | ForEach-Object {
-			$b = (($_ -split "\s+")[2] -replace "\[","" -replace "\]","")
-
-			if ($mainWt -ne $b) {
-				if ($wt -eq $b) {
-					Write-Host "- $b (current)" -ForegroundColor Green
-				} else {
-					Write-Host "- $b" -ForegroundColor Blue
-				}
+		foreach ($w in $wts) {
+			if ($mainWt -ne $w) {
+				continue
+			}
+			
+			if ($wt -eq $w) {
+				Write-Host "- $w (current)" -ForegroundColor Green
+			} else {
+				Write-Host "- $w" -ForegroundColor Blue
 			}
 		}
 	}
