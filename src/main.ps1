@@ -270,7 +270,7 @@ switch ($cmd) {
 		$wr = Get-WtRoot $w
 
 		Invoke-Expression "git worktree remove $wr --force"
-		Invoke-Expression "git branch -d $w --quiet"
+		Invoke-Expression "git branch -D $w --quiet"
 
 		Write-Host "Worktree removed" -ForegroundColor Green
 	}
