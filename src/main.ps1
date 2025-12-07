@@ -41,15 +41,15 @@ $defaultConfig = [PSCustomObject]@{
 	pathPrefix = ($wtRoot -split "/")[-1] + "-"
 }
 
-$configPath
+$configName
 
 if (Join-Path $wtRoot ".config/gww.json" | Test-Path) {
-	$configPath = ".config/gww.json"
+	$configName = ".config/gww.json"
 } else {
-	$configPath = "gww.config.json"
+	$configName = "gww.config.json"
 }
 
-$wtConfigPath = Join-Path $wtRoot $configPath
+$wtConfigPath = Join-Path $wtRoot $configName
 
 if (-not (Test-Path $wtConfigPath)) {
 	Set-Content $wtConfigPath (ConvertTo-Json $defaultConfig)
@@ -113,7 +113,7 @@ function Build-Wt {
 	)
 
 	<# gww.config.json #>
-	Copy-Item $wtConfigPath (Join-Path $nwr $configPath)
+	Copy-Item $wtConfigPath (Join-Path $nwr $configName)
 
 	<# configs #>
 	if ($config.configs) {
