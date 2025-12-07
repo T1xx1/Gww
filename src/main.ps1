@@ -104,16 +104,8 @@ function Build-WtRoot {
 		[Parameter(Mandatory=$true)]
 		[string] $w
 	)
-
-	$wr = $w
-
-	<# pathPrefix #>
-	$wr = $config.pathPrefix + $wr
-
-	<# worktreesDir #>
-	$wr = Join-Path $mainWtRoot $config.worktreesDir $wr
-
-	return $wr
+	
+	return Join-Path $mainWtRoot $config.worktreesDir ($config.pathPrefix + $wr)
 }
 function Build-Worktree {
 	param(
