@@ -235,8 +235,8 @@ switch ($cmd) {
 		}
 
 		if ($w -in $branches) {
-			Write-Host "Use 'gww open' to open it in a worktree"
 			Write-Host "'$w' branch already exists" -ForegroundColor Red
+			Write-Host "Use '> gww open <worktree>' to open it in a worktree"
 
 			exit
 		}
@@ -259,21 +259,20 @@ switch ($cmd) {
 
 			exit
 		}
-
 		if (-not ($w -in $wts)) {
 			Write-Host "$w worktree does not exists" -ForegroundColor Red
 
 			exit
 		}
-
-		Write-Host "Removing worktree"
-
+		
 		<# checkout #>
 		if ($wt -eq $w) {
 			Set-Location $mainWtRoot
-
+			
 			Write-Host "Checking out"
 		}
+		
+		Write-Host "Removing worktree"
 
 		$wr = Get-WtRoot $w
 
