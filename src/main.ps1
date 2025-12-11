@@ -121,7 +121,7 @@ function Build-Wt {
 			$filePath = Join-Path $wtRoot $file
 
 			if (Test-Path $filePath) {
-				Copy-Item $filePath (Join-Path $nwr $file)
+				Copy-Item $filePath (Join-Path $nwr $file) -Recurse
 			}
 		}
 
