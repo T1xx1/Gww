@@ -25,7 +25,7 @@ if ($null -eq $wtRoot) {
 	exit
 }
 
-Invoke-Expression "git worktree prune"
+git worktree prune
 
 $branches = git branch | ForEach-Object {
 	($_ -split "\s+")[1]
@@ -135,7 +135,7 @@ function Build-Wt {
 
 	<# submodules #>
 	if (Join-Path $wtRoot ".gitmodules" | Test-Path) {
-		Invoke-Expression "git submodule update --init --recursive --quiet"
+		git submodule update --init --recursive --quiet
 
 		Write-Host "Submodules initialized"
 	}
@@ -184,7 +184,7 @@ switch ($cmd) {
 	{$_ -in "info","i","version","v"} {
 		Write-Host $gwwInfo.name $gwwInfo.version
 
-		Invoke-Expression "git -v"
+		git -v
 	}
 
 	{$_ -in "branches","bs"} {
@@ -245,7 +245,7 @@ switch ($cmd) {
 
 		Write-Host "Creating worktree"
 
-		Invoke-Expression "git worktree add $wr -b $w --quiet"
+		git worktree add $wr -b $w --quiet
 		
 		Build-Wt $wr
 
@@ -276,8 +276,8 @@ switch ($cmd) {
 
 		$wr = Get-WtRoot $w
 
-		Invoke-Expression "git worktree remove $wr --force"
-		Invoke-Expression "git branch -D $w --quiet"
+		git worktree remove $wr --force
+		git branch -D $w --quiet
 
 		Write-Host "Worktree removed" -ForegroundColor Green
 	}
@@ -300,7 +300,7 @@ switch ($cmd) {
 
 		$wr = Build-WtRoot $b
 
-		Invoke-Expression "git worktree add $wr $b --quiet"
+		git worktree add $wr $b --quiet
 
 		Build-Wt $wr
 
@@ -332,7 +332,7 @@ switch ($cmd) {
 
 		$wr = Get-WtRoot $w
 
-		Invoke-Expression "git worktree remove $wr --force"
+		git worktree remove $wr --force
 
 		Write-Host "Worktree closed" -ForegroundColor Green
 	}
@@ -387,8 +387,8 @@ switch ($cmd) {
 		$wr = Get-WtRoot $w
 		$nwr = Build-WtRoot $nw
 
-		Invoke-Expression "git branch -m $w $nw --quiet"
-		Invoke-Expression "git worktree move $wr $nwr"
+		git branch -m $w $nw --quiet
+		git worktree move $wr $nwr
 
 		if ($checkout) {
 			Set-Location $nwr
