@@ -112,6 +112,8 @@ function Build-Wt {
 		[string] $nwr
 	)
 
+	$cwd = $PWD
+
 	<# gww.config.json #>
 	Copy-Item $configPath (Join-Path $nwr $configName)
 
@@ -127,6 +129,9 @@ function Build-Wt {
 
 		Write-Host "Configs copied"
 	}
+
+	<# checkout nwr #>
+	Set-Location $nwr
 
 	<# submodules #>
 	if (Join-Path $wtRoot ".gitmodules" | Test-Path) {
@@ -155,12 +160,15 @@ function Build-Wt {
 
 	switch ($checkout) {
 		"prompt" {
-			if (Read-Host "> Checkout $wr? [y/n]" -eq "y") {
-				Set-Location $wr
+			if ((Read-Host "> Checkout $nwr? [y/n]") -eq "y") {
+				Set-Location $nwr
 			}
 		}
 		"always" {
-			Set-Location $wr
+			Set-Location $nwr
+		}
+		default {
+			Set-Location $cwd
 		}
 	}
 }
