@@ -235,8 +235,8 @@ switch ($cmd) {
 		}
 
 		if ($w -in $branches) {
-			Write-Host "'$wt' branch already exists" -ForegroundColor Red
 			Write-Host "Use 'gww open' to open it in a worktree"
+			Write-Host "'$w' branch already exists" -ForegroundColor Red
 
 			exit
 		}
