@@ -397,6 +397,9 @@ switch ($cmd) {
 			{$_ -in $null,""} {
 				ConvertTo-Json $config | Write-Host
 			}
+			{$_ -in "help","h"} {
+				Get-Content (Join-Path $gwwRoot "src/config.txt") | Write-Host
+			}
 			{$_ -in "get","g"} {
 				$property = $Args[1]
 

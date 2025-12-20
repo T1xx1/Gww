@@ -40,20 +40,13 @@ exit
 
 Run `gww h` to log all the commands in your terminal or view the [Commands file](./src/cmds.txt).
 
-## Config (`gww.config.json`)
+## Config
 
 The `gww.config.json` configures some aspects of Gww commands.
 
 > Gww supports the config directory as `.config/gww.json` ([.config directory proposal](https://github.com/pi0/config-dir))
 
-| Property         |          | Type                          | Desc                                                      | Default              |
-| ---------------- | -------- | ----------------------------- | ----------------------------------------------------------| -------------------- |
-| **mainBranch**   | required | `string`                      | Name of your primary branch                               | `main`               |
-| **worktreesDir** | required | `string`                      | Relative directory for new worktrees                      | `../`                |
-| **pathPrefix**   | required | `string`                      | Prefix for new worktree names                             | `<repository-name>-` |
-| **configs**      | optional | `[string]`                    | List of config files that will be copied to new worktrees |                      |
-| **postCreate**   | optional | `string`                      | Script to run after creating a worktree                   |                      |
-| **checkout**     | optional | `"never"\|"prompt"\|"always"` | Whether to checkout to a newly created worktree           | `always`             |
+Run `gww config h` to log all supported config properties or view the [Config file](./src/config.txt).
 
 <br />
 

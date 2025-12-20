@@ -1,0 +1,7 @@
+Property       Type                                 Default             Desc
+mainBranch     required string                      main                Name of your primary branch
+worktreesDir   required string                      ../                 Relative directory for new worktrees
+pathPrefix     required string                      <repositoryName->   Prefix for new worktree names
+configs        optional string[]                                        Config files to copy to new worktrees
+postCreate     optional string                                          Setup command to run after worktree creation
+checkout       optional "never"|"prompt"|"always"   always              Checkout to a newly created worktree
