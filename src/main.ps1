@@ -366,9 +366,8 @@ switch ($cmd) {
 		}
 
 		if ($mainWt -eq $w) {
-			if (-not ((Read-Host "> Warning: You are on the main branch. Are you sure you want to rename the main branch? [y/n]") -eq "y")) {
-				exit
-			}
+			Write-Host "Cannot rename the main branch" -ForegroundColor Red
+			exit
 		}
 
 		<# checkout #>
