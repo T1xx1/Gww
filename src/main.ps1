@@ -127,7 +127,7 @@ function Build-Wt {
 			}
 		}
 
-		Write-Host "Configs copied"
+		Write-Host "Configs copied" -ForegroundColor Green
 	}
 
 	<# checkout nwr #>
@@ -137,16 +137,16 @@ function Build-Wt {
 	if (Join-Path $wtRoot ".gitmodules" | Test-Path) {
 		git submodule update --init --recursive --quiet
 
-		Write-Host "Submodules initialized"
+		Write-Host "Submodules initialized" -ForegroundColor Green
 	}
 
 	<# postCreate #>
 	if ($config.postCreate) {
-		Write-Host "Running postCreate"
+		Write-Host "Running postCreate..."
 
 		Invoke-Expression $config.postCreate | Out-Null
 
-		Write-Host "postCreate ran"
+		Write-Host "postCreate ran" -ForegroundColor Green
 	}
 
 	<# checkout #>
@@ -243,7 +243,7 @@ switch ($cmd) {
 
 		$wr = Build-WtRoot $w
 
-		Write-Host "Creating worktree"
+		Write-Host "Creating worktree..."
 
 		git worktree add $wr -b $w --quiet
 		
@@ -268,11 +268,9 @@ switch ($cmd) {
 		<# checkout #>
 		if ($wt -eq $w) {
 			Set-Location $mainWtRoot
-			
-			Write-Host "Checking out"
 		}
 		
-		Write-Host "Removing worktree"
+		Write-Host "Removing worktree..."
 
 		$wr = Get-WtRoot $w
 
@@ -296,7 +294,7 @@ switch ($cmd) {
 			exit
 		}
 
-		Write-Host "Opening branch"
+		Write-Host "Opening branch..."
 
 		$wr = Build-WtRoot $b
 
@@ -304,7 +302,7 @@ switch ($cmd) {
 
 		Build-Wt $wr
 
-		Write-Host "Worktree opened" -ForegroundColor Green
+		Write-Host "Branch opened" -ForegroundColor Green
 	}
 	{$_ -in "close"} {
 		$w = $Args[0]
@@ -321,13 +319,11 @@ switch ($cmd) {
 			exit
 		}
 
-		Write-Host "Closing worktree"
+		Write-Host "Closing worktree..."
 
 		<# checkout #>
 		if ($wt -eq $w) {
 			Set-Location $mainWtRoot
-
-			Write-Host "Checking out"
 		}
 
 		$wr = Get-WtRoot $w
@@ -394,7 +390,7 @@ switch ($cmd) {
 			Set-Location $nwr
 		}
 
-		Write-Host "Renamed worktree" -ForegroundColor Green
+		Write-Host "Worktree renamed" -ForegroundColor Green
 	}
 
 	{$_ -in "config"} {
@@ -438,7 +434,7 @@ switch ($cmd) {
 
 				ConvertTo-Json $config | Set-Content $configPath
 
-				Write-Host "Set '$property' property to '$value'" -ForegroundColor Green
+				Write-Host "'$property' property set" -ForegroundColor Green
 			}
 			{$_ -in "remove","rm"} {
 				$property = $Args[1]
@@ -457,7 +453,7 @@ switch ($cmd) {
 
 				ConvertTo-Json $config | Set-Content $configPath
 
-				Write-Host "Removed '$property' property" -ForegroundColor Green
+				Write-Host "'$property' property removed" -ForegroundColor Green
 			}
 		}
 	}
@@ -468,7 +464,7 @@ switch ($cmd) {
 			exit
 		}
 
-		Write-Host "Running postCreate"
+		Write-Host "Running postCreate..."
 
 		Invoke-Expression $config.postCreate
 
