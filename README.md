@@ -1,6 +1,6 @@
-# Gww (Git Worktree Wrapper)
+# Gww
 
-**Gww** is a PowerShell shell tool that wraps Git commands to provide an improved UX around Git worktrees, making multi-branch and multi-directory workflows way seamless.
+**Gww** (Git Worktree Wrapper) is a PowerShell shell that wraps Git worktree commands to provide an improved UX around Git worktrees, making multi-branch and multi-directory workflows way seamless.
 
 This project was heavily inspired by the [git-worktree-runner by CodeRabbit](https://github.com/coderabbitai/git-worktree-runner).
 
@@ -9,10 +9,11 @@ This project was heavily inspired by the [git-worktree-runner by CodeRabbit](htt
 ## Features
 
 - Better UX working with Git worktrees and worktreed branches
-- Configs setup and postCreate script
+- Git submodule support, custom configs setup and postCreate script
 - Configurable
 
 ## Requirements
+
 - [PowerShell](https://learn.microsoft.com/it-it/powershell) 7+
 - [Git](https://git-scm.com) 2.5+
 
@@ -38,7 +39,7 @@ exit
 
 ## Commands
 
-Run `gww h` to log all the commands in your terminal or view the [Commands file](./src/cmds.txt).
+Run `gww h` to log all the commands or view the [Commands file](./src/cmds.txt).
 
 ## Config
 
