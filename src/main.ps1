@@ -279,7 +279,7 @@ switch ($cmd) {
 
 		Write-Host "Worktree removed" -ForegroundColor Green
 	}
-	{$_ -in "open"} {
+	{$_ -in "open","o"} {
 		$b = $Args[0]
 
 		if (-not $b) {
@@ -304,7 +304,7 @@ switch ($cmd) {
 
 		Write-Host "Branch opened" -ForegroundColor Green
 	}
-	{$_ -in "close"} {
+	{$_ -in "close","c"} {
 		$w = $Args[0]
 
 		if (-not $w) {
@@ -332,7 +332,7 @@ switch ($cmd) {
 
 		Write-Host "Worktree closed" -ForegroundColor Green
 	}
-	{$_ -in "checkout"} {
+	{$_ -in "checkout","ch"} {
 		$w = $Args[0]
 
 		if (-not $w) {
@@ -392,12 +392,12 @@ switch ($cmd) {
 		Write-Host "Worktree renamed" -ForegroundColor Green
 	}
 
-	{$_ -in "config"} {
+	{$_ -in "configuration","config"} {
 		switch ($Args[0]) {
 			{$_ -in $null,""} {
 				ConvertTo-Json $config | Write-Host
 			}
-			{$_ -in "get"} {
+			{$_ -in "get","g"} {
 				$property = $Args[1]
 
 				if (-not $property) {
@@ -414,7 +414,7 @@ switch ($cmd) {
 
 				Write-Host $config.$property
 			}
-			{$_ -in "set"} {
+			{$_ -in "set","s"} {
 				$property = $Args[1]
 				$value = $Args[2]
 
