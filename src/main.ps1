@@ -10,7 +10,7 @@ param(
 	gww
 #>
 $gwwRoot = Join-Path $PSScriptRoot "../";
-$gwwInfo = Get-Content (Join-Path $gwwRoot "gww.json") | ConvertFrom-Json
+$gwwInfo = Get-Content (Join-Path $gwwRoot "./src/info.json") | ConvertFrom-Json
 
 <#
 	global
