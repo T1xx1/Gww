@@ -38,7 +38,7 @@ $wts = git worktree list | ForEach-Object {
 $defaultConfig = [PSCustomObject]@{
 	mainBranch = "main"
 	worktreesDir = "../"
-	pathPrefix = ($wtRoot -split "/")[-1] + "-"
+	worktreesPrefix = ($wtRoot -split "/")[-1] + "-"
 }
 
 $configName
@@ -59,7 +59,7 @@ if (-not (Test-Path $configPath)) {
 
 $config = Get-Content $configPath | ConvertFrom-Json
 
-if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.pathPrefix)) {
+if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.worktreesPrefix)) {
 	if (-not $config.mainBranch) {
 		$config | Add-Member NoteProperty "mainBranch" $defaultConfig.mainBranch
 	}
@@ -68,8 +68,8 @@ if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.
 		$config | Add-Member NoteProperty "worktreesDir" $defaultConfig.worktreesDir
 	}
 	
-	if (-not $config.pathPrefix) {
-		$config | Add-Member NoteProperty "pathPrefix" $defaultConfig.pathPrefix
+	if (-not $config.worktreesPrefix) {
+		$config | Add-Member NoteProperty "worktreesPrefix" $defaultConfig.worktreesPrefix
 	}
 
 	<# gww.config.json #>
@@ -105,7 +105,7 @@ function Build-WtRoot {
 		[string] $w
 	)
 	
-	return Join-Path $mainWtRoot $config.worktreesDir ($config.pathPrefix + $w)
+	return Join-Path $mainWtRoot $config.worktreesDir ($config.worktreesPrefix + $w)
 }
 function Build-Wt {
 	param(
@@ -152,8 +152,8 @@ function Build-Wt {
 	<# checkout #>
 	$checkout
 
-	if ($config.checkout) {
-		$checkout = $config.checkout
+	if ($config.autoCheckout) {
+		$checkout = $config.autoCheckout
 	} else {
 		$checkout = "always"
 	}
