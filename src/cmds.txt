@@ -2,6 +2,7 @@ Usage: gww <command> [<args>]
 
 Gww commands:
 - info|i                                  Show Gww info
+- init                                    Initialize Gww config
 
 Worktree management:
 - list|ls                                 List all worktrees
@@ -14,6 +15,7 @@ Worktree management:
 
 Current worktree management:
 - config                                  Log Gww config
+- config init                             Initialize Gww config
 - config get         <property>           Get Gww config property
 - config set         <property> <value>   Set Gww config property
 - config remove|rm   <property>           Remove Gww config property

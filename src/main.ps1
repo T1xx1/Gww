@@ -54,7 +54,7 @@ $configPath = Join-Path $wtRoot $configName
 if (-not (Test-Path $configPath)) {
 	Set-Content $configPath (ConvertTo-Json $defaultConfig)
 	
-	Write-Host "Gww config initialized`n" -ForegroundColor Green
+	Write-Host "Gww config initialized" -ForegroundColor Green
 }
 
 $config = Get-Content $configPath | ConvertFrom-Json
@@ -172,6 +172,10 @@ switch ($cmd) {
 		Write-Host $gwwInfo.name $gwwInfo.version
 
 		git -v
+	}
+
+	{$_ -in "init"} {
+		gww config init
 	}
 
 	{$_ -in "branches","bs"} {
@@ -384,6 +388,15 @@ switch ($cmd) {
 		switch ($Args[0]) {
 			{$_ -in $null,""} {
 				ConvertTo-Json $config | Write-Host
+			}
+			{$_ -in "init"} {
+				if (Test-Path $configPath) {
+					Write-Host "Gww config already initialized" -ForegroundColor Green
+
+					gww config
+
+					exit
+				}
 			}
 			{$_ -in "help","h"} {
 				Get-Content (Join-Path $gwwRoot "src/config.txt") | Write-Host
