@@ -63,11 +63,9 @@ if ((-not $config.mainBranch) -or (-not $config.worktreesDir) -or (-not $config.
 	if (-not $config.mainBranch) {
 		$config | Add-Member NoteProperty "mainBranch" $defaultConfig.mainBranch
 	}
-	
 	if (-not $config.worktreesDir) {
 		$config | Add-Member NoteProperty "worktreesDir" $defaultConfig.worktreesDir
 	}
-	
 	if (-not $config.worktreesPrefix) {
 		$config | Add-Member NoteProperty "worktreesPrefix" $defaultConfig.worktreesPrefix
 	}
@@ -230,7 +228,6 @@ switch ($cmd) {
 
 			exit
 		}
-
 		if ($w -in $branches) {
 			Write-Host "'$w' branch already exists" -ForegroundColor Red
 			Write-Host "Use '> gww open <worktree>' to open it in a worktree"
@@ -291,7 +288,6 @@ switch ($cmd) {
 
 			exit
 		}
-
 		if (-not ($b -in $branches)) {
 			Write-Host "'$b' branch does not exist" -ForegroundColor Red
 
@@ -316,7 +312,6 @@ switch ($cmd) {
 
 			exit
 		}
-
 		if (-not ($w -in $wts)) {
 			Write-Host "'$w' worktree does not exist" -ForegroundColor Red
 
@@ -344,7 +339,6 @@ switch ($cmd) {
 
 			exit
 		}
-
 		if (-not ($w -in $wts)) {
 			Write-Host "'$w' worktree does not exist" -ForegroundColor Red
 
@@ -362,13 +356,11 @@ switch ($cmd) {
 
 			exit
 		}
-
 		if (-not ($wt -in $wts)) {
 			Write-Host "'$wt' worktree does not exist" -ForegroundColor Red
 
 			exit
 		}
-
 		if ($mainWt -eq $w) {
 			Write-Host "Cannot rename the main branch" -ForegroundColor Red
 			exit
@@ -412,7 +404,6 @@ switch ($cmd) {
 
 					exit
 				}
-
 				if (-not $config.$property) {
 					Write-Host "'$property' property does not exist" -ForegroundColor Red
 
@@ -450,7 +441,6 @@ switch ($cmd) {
 
 					exit
 				}
-
 				if (-not $config.$property) {
 					Write-Host "'$property' property does not exist" -ForegroundColor Red
 				}
