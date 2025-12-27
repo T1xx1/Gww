@@ -112,7 +112,7 @@ function Build-Wt {
 		[string] $nwr
 	)
 
-	$cwd = $PWD
+	$cwd = Get-Location
 
 	<# gww.config.json #>
 	Copy-Item $configPath (Join-Path $nwr $configName)
