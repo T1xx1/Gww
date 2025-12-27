@@ -145,25 +145,17 @@ function Build-Wt {
 	}
 
 	<# checkout #>
-	$checkout
-
-	if ($config.autoCheckout) {
-		$checkout = $config.autoCheckout
-	} else {
-		$checkout = "always"
-	}
-
-	switch ($checkout) {
-		"prompt" {
-			if ((Read-Host "> Checkout $nwr? [y/n]") -eq "y") {
-				Set-Location $nwr
-			}
-		}
+	switch ($config.autoCheckout) {
 		"always" {
 			Set-Location $nwr
 		}
-		default {
+		"never" {
 			Set-Location $cwd
+		}
+		default {
+			if ((Read-Host "> Checkout to new worktree? [y/n]") -eq "y") {
+				Set-Location $nwr
+			}
 		}
 	}
 }

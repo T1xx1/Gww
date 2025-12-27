@@ -4,4 +4,4 @@ worktreesDir      required string                      ../                 Relat
 worktreesPrefix   required string                      <repositoryName->   Prefix for new worktree names
 configs           optional string[]                                        Config files to copy to new worktrees
 postCreate        optional string                                          Setup command for new worktrees
-autoCheckout      optional "never"|"prompt"|"always"   always              Checkout to newly created worktrees
+autoCheckout      optional "never"|"prompt"|"always"   prompt              Checkout to newly created worktrees
