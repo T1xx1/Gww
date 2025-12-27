@@ -1,6 +1,7 @@
 Usage: gww <command> [<args>]
 
 Gww commands:
+- help|h                                  Show this information
 - info|i                                  Show Gww info
 - init                                    Initialize Gww config
 
