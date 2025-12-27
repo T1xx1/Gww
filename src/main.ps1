@@ -262,12 +262,19 @@ switch ($cmd) {
 			exit
 		}
 		
+		Write-Host "Removing worktree..."
+
+		<# submodules #>
+		if (Join-Path $wtRoot ".gitmodules" | Test-Path) {
+			git submodule deinit --all --quiet
+			
+			Write-Host "Submodules deinitialized" -ForegroundColor Green
+		}
+
 		<# checkout #>
 		if ($wt -eq $w) {
 			Set-Location $mainWtRoot
 		}
-		
-		Write-Host "Removing worktree..."
 
 		$wr = Get-WtRoot $w
 
