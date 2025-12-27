@@ -114,9 +114,6 @@ function Build-Wt {
 
 	$cwd = Get-Location
 
-	<# gww.config.json #>
-	Copy-Item $configPath (Join-Path $nwr $configName)
-
 	<# configs #>
 	if ($config.configs) {
 		foreach ($file in $config.configs) {
